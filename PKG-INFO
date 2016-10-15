@@ -1,0 +1,10 @@
+Metadata-Version: 0.0.1
+Name: automata_python
+Version: 0.0.2
+Summary: The only automata library you will ever need
+Home-page: https://github.com/hemangsk/automata-python
+Author: Hemang Kumar
+Author-email: hemangsk@gmail.com
+License: GPLv3
+Description: Automata-Python
+        ========

@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: automata-python
+Version: 0.0.1
+Summary: The only automaton library you will ever need
+Home-page: https://github.com/hemangsk/automata-python
+Author: Hemang Kumar
+Author-email: hemangsk@gmail.com
+License: GPLv3
+Description: UNKNOWN
+Keywords: language finite automata turing machine push down automata linear bound automata
+Platform: UNKNOWN

@@ -1,0 +1,7 @@
+setup.cfg
+setup.py
+automata/language.py
+automata_python.egg-info/PKG-INFO
+automata_python.egg-info/SOURCES.txt
+automata_python.egg-info/dependency_links.txt
+automata_python.egg-info/top_level.txt
