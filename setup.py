@@ -6,7 +6,7 @@ from setuptools import setup
 setup(
     name='automata_python',
     version='0.0.1',
-    description='The only automaton library you will ever need',
+    description='Python Automata Library',
     long_description=get_long_description(),
     url='https://github.com/hemangsk/automata-python',
     author='Hemang Kumar',
