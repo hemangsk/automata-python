@@ -5,9 +5,8 @@ from setuptools import setup
 
 setup(
     name='automata_python',
-    version='0.0.1',
+    version='0.0.3',
     description='Python Automata Library',
-    long_description=get_long_description(),
     url='https://github.com/hemangsk/automata-python',
     author='Hemang Kumar',
     author_email='hemangsk@gmail.com',
