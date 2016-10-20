@@ -14,8 +14,22 @@ class DFA(object):
 
         F is a set of final state/states of Q (F ⊆ Q).
         """
-        self.states = states
-        self.alphabet = alphabet
-        self.transitions = transitions
-        self.initial_state = initial_state
-        self.final_states = final_states
+        self.states = states                        #list
+        self.alphabet = alphabet                    #list
+        self.transitions = transitions              #dict
+        self.initial_state = initial_state          #char
+        self.final_states = final_states            #list
+
+        """
+        states=['q0', 'q1'],
+        alphabets=['a', 'b'],
+        transitions={
+            'q0': {'a': 'q0', 'b': 'q1'},
+            'q1': {'a': 'q0', 'b': 'q1'},
+         },
+        initial_state='q0',
+        final_states=['q1']
+        """
+
+    def is_string_valid(self, string):
+        for
