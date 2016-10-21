@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-class DFA(object):
-    """Deterministic Finite Automata"""
+class NDFA(object):
+    """Non Deterministic Finite Automata"""
 
     def __init__(self, states, alphabet, transitions, initial_state, final_states):
         """
@@ -25,39 +25,55 @@ class DFA(object):
         states=['q0', 'q1'],
         alphabets=['a', 'b'],
         transitions={
-            'q0': {'a': 'q0', 'b': 'q1'},
-            'q1': {'a': 'q0', 'b': 'q1'},
+            'q0': {'a': ['q0', 'q1'], 'b': 'q1'},
+            'q1': {'a': 'q0', 'b': ['q1', 'q0']},
          },
         initial_state='q0',
         final_states=['q1']
         """
 
     def is_string_valid(self, string):
-        """Return True if string is accepted by DFA, otherwise return False"""
+        """Return True if string is accepted by NDFA, otherwise return False"""
 
         inputs = list(string)
         current_state = self.initial_state
 
         for letter in inputs:
+
             try:
 
-                if letter in self.transitions[current_state]:
-                    current_state = self.transitions[current_state][letter]
+                if isinstance(current_state, list):
+                    temp_cur_state = []
+                    for state in current_state:
+                        if letter in self.transitions[state]:
+                            temp_cur_state.push(self.transitions[state][letter])
+                    current_state = temp_cur_state
+
+                elif isinstance(current_state, str):
+                    if letter in self.transitions[current_state]:
+                        current_state = self.transitions[current_state][letter]
 
                 else:
+                    print("Third Else : return")
                     return False
+
             except KeyError as e:
                 return False
 
-        if current_state in self.final_states:
-            return True
+        if isinstance(current_state, str):
+            if current_state in self.final_states:
+                return True
+
+        elif isinstance(current_state, list):
+            if not set(current_state).isdisjoint(self.final_states):
+                return True
 
         return False
 
     def __str__(self):
-        """"Pretty Print the DFA"""
+        """"Pretty Print the NDFA"""
 
-        output = "\nDeterministic Finite Automata" + \
+        output = "\nNon-Deterministic Finite Automata" + \
                  "\nStates " + str(self.states) + \
                  "\nAlphabet " + str(self.alphabet) + \
                  "\nTransitions " + str(self.transitions) + \
@@ -66,19 +82,16 @@ class DFA(object):
 
         return output
 
-
-"""
-d = DFA(
+d = NDFA(
 ['q0', 'q1'],
 ['a', 'b'],
 {
-    'q0': {'a': 'q0', 'b': 'q1'},
+    'q0': {'a': ['q0', 'q1'], 'b': 'q1'},
     'q1': {'a': 'q0', 'b': 'q1'},
  },
-'q0',
+ 'q0',
 ['q1']
 )
 
-print(d.is_string_valid('ababba'))
+print(d.is_string_valid('a'))
 print(d)
-"""
