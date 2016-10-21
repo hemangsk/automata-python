@@ -32,4 +32,37 @@ class DFA(object):
         """
 
     def is_string_valid(self, string):
-        for
+        """Return True if string is accepted by DFA, otherwise return False"""
+        inputs = list(string)
+        current_state = self.initial_state
+     d
+        for letter in inputs:
+            try:
+
+                if(letter in self.transitions[current_state]):
+                    current_state = self.transitions[current_state][letter]
+
+                else:
+                    return False
+            except KeyError as e:
+                return False
+
+
+        if(current_state in self.final_states):
+            return True
+
+        return False
+
+
+d = DFA(
+['q0', 'q1'],
+['a', 'b'],
+{
+    'q0': {'a': 'q0', 'b': 'q1'},
+    'q1': {'a': 'q0', 'b': 'q1'},
+ },
+'q0',
+['q1']
+)
+
+print(d.is_string_valid('ab'))
