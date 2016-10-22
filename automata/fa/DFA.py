@@ -67,6 +67,7 @@ class DFA(object):
         return output
 
 
+
 """
 d = DFA(
 ['q0', 'q1'],
@@ -80,5 +81,6 @@ d = DFA(
 )
 
 print(d.is_string_valid('ababba'))
+print(d.convert_to_dfa())
 print(d)
 """

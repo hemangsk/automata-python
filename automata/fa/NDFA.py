@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from automata.data_structures.Stack import Stack
+
+
 class NDFA(object):
     """Non Deterministic Finite Automata"""
 
@@ -25,8 +28,8 @@ class NDFA(object):
         states=['q0', 'q1'],
         alphabets=['a', 'b'],
         transitions={
-            'q0': {'a': ['q0', 'q1'], 'b': 'q1'},
-            'q1': {'a': 'q0', 'b': ['q1', 'q0']},
+            'q0': {'a': ['q0', 'q1'], 'b': ['q1']},
+            'q1': {'a': ['q0'], 'b': ['q1', 'q0']},
          },
         initial_state='q0',
         final_states=['q1']
@@ -70,6 +73,55 @@ class NDFA(object):
 
         return False
 
+    def convert_to_dfa(self):
+        """"Returns equivalent DFA of the given NDFA"""
+
+        foo_dict = {}
+        foo_dict[self.initial_state] = self.transitions[self.initial_state]
+        #print (foo_dict)
+
+        s = Stack()
+        q = Stack()
+
+        for x in self.alphabet:
+            s.push(foo_dict[self.initial_state][x])
+
+        #print(s)
+
+        while(not s.isEmpty()):
+           # print ("Iteration")
+            current_states = s.pop()
+            q.push(current_states)
+
+            #print(q)
+            #print(current_states)
+            for a in self.alphabet:
+                #print("a = " + str(a))
+                print(s)
+                temp_list = []
+
+             #   print("temp_list = " + str(temp_list))
+                for c in current_states:
+                #    print("c = " + str(c))
+
+                    for t in self.transitions[c][a]:
+                        if t not in temp_list:
+                            temp_list.append(t)
+               #     print("temp_list.append  = " + str(temp_list))
+
+             #   print("Temp " + str(temp_list))
+              #  print("Stack" + str(s))
+
+                if (temp_list not in q and temp_list not in s):
+                   # print(s)
+                    s.push(temp_list)
+
+             #   if temp_list not in s and temp_list is not None and temp_list is not []:
+                   # print("Inside if" + str(s))
+                    #s.push(temp_list)
+
+        print ("Current States "  + str(current_states))
+
     def __str__(self):
         """"Pretty Print the NDFA"""
 
@@ -82,16 +134,25 @@ class NDFA(object):
 
         return output
 
+
+
 d = NDFA(
 ['q0', 'q1'],
 ['a', 'b'],
 {
-    'q0': {'a': ['q0', 'q1'], 'b': 'q1'},
-    'q1': {'a': 'q0', 'b': 'q1'},
+    'q0': {'a': ['q0', 'q1'], 'b': ['q1']},
+    'q1': {'a': ['q0'], 'b': ['q1']},
  },
  'q0',
 ['q1']
 )
 
+print (d.convert_to_dfa())
+
+s = Stack()
+
+
+"""
 print(d.is_string_valid('a'))
 print(d)
+"""
