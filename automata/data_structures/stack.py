@@ -15,6 +15,9 @@ class Stack:
     def size(self):
         return len(self.stack)
 
+    def top(self):
+        return self.stack[self.size() - 1]
+
     def __contains__(self, item):
         for x in self.stack:
             #print ("in Stack" + str(x))
