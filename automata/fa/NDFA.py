@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from automata.data_structures.Stack import Stack
+from automata.fa.DFA import DFA
 
 
 class NDFA(object):
@@ -113,6 +114,37 @@ class NDFA(object):
                 if temp_list not in q and temp_list not in s and temp_list is not []:
                     s.push(temp_list)
 
+        i = 0
+        map_states ={}
+        for a in foo_dict.keys():
+            if i == 0:
+                dfa_initial_state = 'Q0'
+            map_states[a] = 'Q' + str(i)
+            i+=1
+        dfa_transitions = {}
+        dfa_finial_states = []
+        dfa_states = []
+
+        for a in foo_dict.keys():
+            dfa_transitions[map_states[a]] = {}
+            for b in self.alphabet:
+
+                if  set(foo_dict[a][b]).isdisjoint(self.final_states):
+                    if (a) not in dfa_finial_states:
+                        dfa_finial_states.append(map_states[a])
+
+                dfa_transitions[map_states[a]][b] = map_states[str(foo_dict[a][b])]
+
+                if map_states[a] not in dfa_states:
+                    dfa_states.append(map_states[a])
+
+                if (map_states[str(foo_dict[a][b])]) not in dfa_states:
+                    dfa_states.append(map_states[str(foo_dict[a][b])])
+
+        # Here we go
+        d = DFA(dfa_states, self.alphabet, dfa_transitions, dfa_initial_state, dfa_finial_states)
+        print(d)
+
 
     def __str__(self):
         """"Pretty Print the NDFA"""
@@ -129,12 +161,11 @@ class NDFA(object):
 
 
 d = NDFA(
-['q0', 'q1', 'q2'],
+['q0', 'q1'],
 ['a', 'b'],
 {
-    'q0': {'a': ['q0', 'q1'], 'b': ['q0', 'q1']},
-    'q1': {'a': ['q0'], 'b': ['q2']},
-    'q2': {}
+    'q0': {'a': ['q0', 'q1'], 'b': ['q1']},
+    'q1': {'a': ['q0'], 'b': ['q1']}
  },
  'q0',
 ['q1']
