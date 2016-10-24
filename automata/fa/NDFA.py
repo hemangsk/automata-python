@@ -58,7 +58,6 @@ class NDFA(object):
                         current_state = self.transitions[current_state][letter]
 
                 else:
-                    print("Third Else : return")
                     return False
 
             except KeyError as e:
@@ -114,13 +113,14 @@ class NDFA(object):
                 if temp_list not in q and temp_list not in s and temp_list is not []:
                     s.push(temp_list)
 
+        dfa_initial_state = 'Q0'
+
         i = 0
         map_states ={}
         for a in foo_dict.keys():
-            if i == 0:
-                dfa_initial_state = 'Q0'
             map_states[a] = 'Q' + str(i)
             i+=1
+
         dfa_transitions = {}
         dfa_finial_states = []
         dfa_states = []
@@ -144,7 +144,7 @@ class NDFA(object):
         # Here we go
         d = DFA(dfa_states, self.alphabet, dfa_transitions, dfa_initial_state, dfa_finial_states)
         print(d)
-
+        return d
 
     def __str__(self):
         """"Pretty Print the NDFA"""
@@ -171,9 +171,10 @@ d = NDFA(
 ['q1']
 )
 
-print (d.convert_to_dfa())
+
 
 """
+print (d.convert_to_dfa())
 print(d.is_string_valid('a'))
 print(d)
 """
