@@ -59,19 +59,51 @@ class DFA(object):
 
     def minimize(self):
 
-        state_list = []
-        state_list.append(list(set(self.states) - set(self.final_states)))
-        state_list.append(self.final_states)
+        state_list = [list(set(self.states) - set(self.final_states)), self.final_states]
 
         foo_dict = {}
+        final_list = []
 
-        state_list, foo_dict = self.create_foo_dict(state_list, foo_dict)
-        print (foo_dict)
-        print (state_list)
+        while(1):
 
-        self.create_state_list(state_list, foo_dict)
+            if state_list == final_list :
+                break
+            final_list, foo_dict = self.create_foo_dict(state_list, foo_dict)
+            state_list = self.create_state_list(foo_dict)
 
-    def create_state_list(self, state_list, foo_dict):
+        new_states_dict = {}
+        minified_initial_state = ''
+        minified_states = []
+        minified_final_states = []
+        i = 0
+        for x in state_list:
+            for y in x:
+                string = 'P' + str(i)
+                new_states_dict[y] =  string
+                if y in self.final_states and string not in minified_final_states:
+                    minified_final_states.append(string)
+
+                if y == self.initial_state and minified_initial_state == '':
+                    minified_initial_state = string
+
+            if string not in minified_states:
+                minified_states.append(string)
+
+            i += 1
+
+        minified_transitions = {}
+        for x in self.alphabet:
+            for s in self.states:
+                try:
+                    minified_transitions[new_states_dict[s]][x] = new_states_dict[self.transitions[s][x]]
+                except KeyError as e:
+                    minified_transitions[new_states_dict[s]] = {}
+                    minified_transitions[new_states_dict[s]][x] = new_states_dict[self.transitions[s][x]]
+
+        minified_dfa = DFA(minified_states, self.alphabet, minified_transitions, minified_initial_state, minified_final_states)
+        print(minified_dfa)
+
+    def create_state_list(self, foo_dict):
         temp_list = []
         for x in foo_dict.keys():
             temp_list.append(foo_dict[x])
@@ -81,7 +113,6 @@ class DFA(object):
             if x not in temp_list_2:
                 temp_list_2.append(x)
 
-        print(temp_list_2)
         state_list = []
 
         for x in temp_list_2:
@@ -91,7 +122,7 @@ class DFA(object):
                     state_list_element.append(k)
             state_list.append(state_list_element)
 
-        print(state_list)
+        return state_list
 
     def create_foo_dict(self, state_list, foo_dict):
 
