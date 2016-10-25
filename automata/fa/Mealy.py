@@ -25,6 +25,7 @@ class Mealy(object):
         self.initial_state = initial_state
 
     def get_output_from_string(self, string):
+        """Return Mealy Machine's output when a given string is given as input"""
 
         temp_list = list(string)
         current_state = self.initial_state
