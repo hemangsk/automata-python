@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import itertools
 
 class DFA(object):
     """Deterministic Finite Automata"""
