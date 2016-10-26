@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from automata.fa.Mealy import Mealy
 
 
 class Moore(object):
@@ -33,6 +34,37 @@ class Moore(object):
 
         return output
 
+    def convert_to_mealy(self):
+        mealy_transitions = {}
+
+        for x in self.transitions.keys():
+
+            try:
+                mealy_transitions[x] = {}
+
+                for  a in self.input_alphabet:
+                    mealy_transitions[x][a] = (self.transitions[x][a], self.output_table[self.transitions[x][a]])
+
+            except KeyError as e:
+                pass
+
+        mealy_input_alphabet = self.input_alphabet
+        mealy_output_alphabet = self.output_alphabet
+        mealy_initial_state = self.initial_state
+        mealy_states = self.states
+
+        #print(mealy_transitions)
+
+        mealy_from_moore = Mealy(
+            mealy_states,
+            mealy_input_alphabet,
+            mealy_output_alphabet,
+            mealy_transitions,
+            mealy_initial_state
+        )
+
+        print(mealy_from_moore)
+
     def __str__(self):
         """"Pretty Print the Moore Machine"""
 
@@ -46,29 +78,29 @@ class Moore(object):
 
         return output
 
-"""
+
 moore = Moore(['q0', 'q1', 'q2', 'q3'],
               ['a' , 'b'],
               ['0', '1'],
               {
                   'q0' : {
                       'a' : 'q1',
-                      'b' : 'q3',
+                      'b' : 'q3'
 
                   },
                   'q1': {
                       'a': 'q3',
-                      'b': 'q1',
+                      'b': 'q1'
 
                   },
                   'q2': {
                       'a': 'q0',
-                      'b': 'q3',
+                      'b': 'q3'
 
                   },
                   'q3': {
                       'a': 'q3',
-                      'b': 'q2',
+                      'b': 'q2'
 
                   }
 
@@ -87,4 +119,4 @@ moore = Moore(['q0', 'q1', 'q2', 'q3'],
               )
 print(moore)
 print(moore.get_output_from_string('abbba'))
-"""
+print(moore.convert_to_mealy())
