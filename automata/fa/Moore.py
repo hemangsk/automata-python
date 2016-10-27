@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from automata.fa.Mealy import Mealy
 
 
 class Moore(object):
@@ -55,6 +54,8 @@ class Moore(object):
 
         #print(mealy_transitions)
 
+        from automata.fa.Mealy import Mealy
+
         mealy_from_moore = Mealy(
             mealy_states,
             mealy_input_alphabet,
@@ -78,7 +79,7 @@ class Moore(object):
 
         return output
 
-
+"""
 moore = Moore(['q0', 'q1', 'q2', 'q3'],
               ['a' , 'b'],
               ['0', '1'],
@@ -120,3 +121,5 @@ moore = Moore(['q0', 'q1', 'q2', 'q3'],
 print(moore)
 print(moore.get_output_from_string('abbba'))
 print(moore.convert_to_mealy())
+
+"""
