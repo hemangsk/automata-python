@@ -34,3 +34,48 @@ pip install automata_python
 git clone https://github.com/hemangsk/automata-python.git
 ```
 
+<br>
+## Project Structure
+
+<table><tr><td>automata</td></tr></table>
+
+- <dl>
+  <dt>fa
+  </dt>
+  <dd>finite automata package</dd>
+</dl>
+- <dl>
+  <dt>data-structures</dt>
+  <dd>contains the data structures used</dd>
+</dl>
+
+
+
+<table><tr><td>fa</td></tr></table>
+
+- <dl>
+  <dt>DFA
+  </dt>
+  <dd>Deterministic Finite Automata</dd>
+</dl>
+- <dl>
+  <dt>NDFA</dt>
+  <dd>Non Deterministic Finite Automata</dd>
+</dl>
+- <dl>
+  <dt>Mealy</dt>
+  <dd>Mealy Machine</dd>
+</dl>
+- <dl>
+  <dt>Moore</dt>
+  <dd>*Moore Machine*</dd>
+</dl>
+
+
+<table><tr><td>data-structures</td></tr></table>
+
+- <dl>
+  <dt>Stack
+  </dt>
+  <dd>The class implementing Stack</dd>
+</dl>
