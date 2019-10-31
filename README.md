@@ -4,7 +4,7 @@
 <p align="center">
 <img src = "images/automatasub.png"/>
 </p>
----
+
 
 <p align="center">
 <a href="https://badge.fury.io/py/automata_python"><img src="https://badge.fury.io/py/automata_python.svg" alt="PyPI version" height="24"></a>
