@@ -15,7 +15,7 @@
 
 <br>
 
-##Installation
+## Installation
 
 -  Using PIP
 
@@ -29,7 +29,7 @@ pip install automata_python
 git clone https://github.com/hemangsk/automata-python.git
 ```
 
-<br>
+
 ## Project Structure
 
 <table><tr><td>automata</td></tr></table>
@@ -63,7 +63,7 @@ git clone https://github.com/hemangsk/automata-python.git
 </dl>
 - <dl>
   <dt>Moore</dt>
-  <dd>*Moore Machine*</dd>
+  <dd>Moore Machine</dd>
 </dl>
 
 
